@@ -55,12 +55,12 @@
 }
 
 #hero-image-container {
-  background: url("/images/vehicles/delorean.jpg") no-repeat center center / cover;
-  width: 100%;
-  height: 0;
-  padding-bottom: 51%;
+  background: url("/images/vehicles/delorean.jpg") no-repeat center center / contain;
+  width: 350px;
+  height: 179px;
   position: relative;
   font-family: "Roboto Slab";
+  margin: 0 auto;
 }
 
 .hero-image-textbox {
@@ -86,7 +86,6 @@
   background-color: #00ADD0;
   border: none;
   border-radius: 0.2rem;
-  /* color: red; */
 }
 
 #hero-image-container img{
@@ -108,7 +107,6 @@
   grid-template-columns: auto auto;
   min-width: 342px;
   max-width: 342px;
-  /* width: 100%; */
 }
 
 .upgrades {
@@ -131,4 +129,85 @@
 
 .upgrades-containers figure img {
   margin: 1rem;
+}
+
+/* ---------------- Large View ---------------- */
+
+@media (min-width: 500px) {
+  body {
+    max-width: 500px;
+  }
+
+  .welcome-message {
+    font-size: 1.5rem;
+  }
+
+  #hero-image-container {
+    width: 450px;
+    height: 255px;
+    position: relative;
+  }
+
+  #hero-image-title {
+    font-size: 1.3rem;
+  }
+
+  .hero-image-textbox {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  .hero-image-textbox button {
+    font-size: 1rem;
+    padding: 1rem;
+  }
+
+  .reviews-container, .upgrades-containers {
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 502px) {
+  body {
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 750px) {
+  html {
+    background: url("/images/site/small_check.jpg") no-repeat center center / cover;
+    background-attachment: fixed;
+  }
+
+  body {    
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  #wrapper {
+    background-color: white;
+    border: solid 0.3rem #00ADD0;
+    border-radius: 0.6rem;
+    padding: 1rem;
+    margin: 1rem;
+  }
+
+  .header-nav ul {
+    justify-content: space-around;
+  }
+
+  #main-content {
+    display: flex;
+    flex-direction: row-reverse;
+    padding-bottom: 2rem;
+  }
+
+  h2 {
+    padding: 2rem 0;
+  }
+
+  .reviews-container ul li {
+    padding-bottom: 1.8rem;
+  }
+  
 }
