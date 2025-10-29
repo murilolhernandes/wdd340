@@ -4,3 +4,131 @@
 *:after {
   box-sizing: border-box;
 }
+
+#top-header a {
+  text-decoration: none;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+}
+
+#top-header {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 0.5rem;
+}
+
+.site-name {
+  font-size: 2rem;
+}
+
+.site-name a {
+  color: #203349;
+}
+
+#tools a {
+  color: black;
+}
+
+.header-nav ul {
+  list-style-type: none;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background-color: #203349;
+  color: white;
+}
+
+.header-nav ul {
+  display: flex;
+  font-family: sans-serif;
+}
+
+.welcome-message, #hero-image-container, #main-content {
+  font-family: "Roboto Slab";
+
+}
+
+.welcome-message {
+  font-family: "Roboto Slab";
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+#hero-image-container {
+  background: url("/images/vehicles/delorean.jpg") no-repeat center center / cover;
+  width: 100%;
+  height: 0;
+  padding-bottom: 51%;
+  position: relative;
+  font-family: "Roboto Slab";
+}
+
+.hero-image-textbox {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.5);
+  color: #00ADD0;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+#hero-image-title {
+  font-weight: 900;
+  font-size: 1.05rem;
+}
+
+.hero-image-text {
+  margin: 0;
+  padding-bottom: 5px; 
+}
+
+.hero-image-textbox button {
+  padding: 0.5rem;
+  background-color: #00ADD0;
+  border: none;
+  border-radius: 0.2rem;
+  /* color: red; */
+}
+
+#hero-image-container img{
+  width: 100%;
+  height: 100%;
+}
+
+.reviews-container ul {
+  padding-left: 20px;
+}
+
+.reviews-container ul li {
+  padding-bottom: 0.9rem;
+}
+
+.upgrades-containers {
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: auto auto;
+  min-width: 342px;
+  max-width: 342px;
+  /* width: 100%; */
+}
+
+.upgrades {
+  min-height: 135px;
+  max-width: 150px;
+  min-width: 150px;
+  text-align: center;
+}
+
+.upgrades-containers figure {
+  display: flex;
+  justify-content: center;
+  background-color: #00ADD0;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  min-height: 114px;
+  border: solid 1px black;
+}
+
+.upgrades-containers figure img {
+  margin: 1rem;
+}
