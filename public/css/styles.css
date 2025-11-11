@@ -35,13 +35,13 @@
   align-items: center;
   padding: 15px;
   background-color: #203349;
-  color: white;
   display: flex;
   font-family: sans-serif;
 }
 
-.nav-ul li {
+.nav-ul a {
   text-decoration: none;
+  color: white;
 }
 
 .welcome-message, #hero-image-container, #main-content {
