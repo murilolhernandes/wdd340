@@ -36,11 +36,12 @@
   padding: 15px;
   background-color: #203349;
   color: white;
-}
-
-.header-nav ul {
   display: flex;
   font-family: sans-serif;
+}
+
+.nav-ul li {
+  text-decoration: none;
 }
 
 .welcome-message, #hero-image-container, #main-content {
