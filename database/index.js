@@ -25,6 +25,7 @@ if (process.env.NODE_ENV == "development") {
         return res
       } catch (error) {
         console.error("error in query", { text })
+        throw error
       }
     },
   }
