@@ -39,9 +39,21 @@
   font-family: sans-serif;
 }
 
+.header-nav ul li {
+  padding: 5px;
+}
+
 .nav-ul a {
   text-decoration: none;
   color: white;
+}
+
+.header-nav ul li:hover {
+  background-color: white;
+}
+
+.nav-ul a:hover {
+  color: black;
 }
 
 .welcome-message, #hero-image-container, #main-content {
