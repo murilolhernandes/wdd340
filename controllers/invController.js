@@ -39,7 +39,7 @@ invCont.buildByVehicleId = async function (req, res, next) {
  *  Trigger an intentional error view
 * ************************** */
 invCont.triggerError = async function (req, res, next) {
-  throw new Error("'Oh no! There was a crash. Maybe try a different route? ('Intentional 500-level error triggered)")
+  throw new Error("Oh no! There was a crash. Maybe try a different route? ('Intentional 500-level error triggered)")
 }
 
 module.exports = invCont
