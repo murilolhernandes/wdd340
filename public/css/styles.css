@@ -56,7 +56,7 @@
   color: black;
 }
 
-.welcome-message, #hero-image-container, #main-content {
+.welcome-message, #hero-image-container, #main-content, h1, .namePrice {
   font-family: "Roboto Slab";
 
 }
@@ -127,6 +127,7 @@
   max-width: 150px;
   min-width: 150px;
   text-align: center;
+  margin: 0 auto;
 }
 
 .upgrades-containers figure {
@@ -144,6 +145,43 @@
   margin: 1rem;
 }
 
+#inv-display {
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  padding: 0;
+  gap: 2rem;
+
+}
+
+.vehicles {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.vehicles img {
+  border-radius: 1rem;
+}
+
+.namePrice {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1rem;
+}
+
+.namePrice hr {
+  width: 100%;
+  border: none;
+  background-color: black;
+  height: 2px;
+}
+
+.namePrice span, h2 {
+  margin: 0 auto;
+}
 /* ---------------- Large View ---------------- */
 
 @media (min-width: 500px) {
@@ -177,6 +215,36 @@
 
   .reviews-container, .upgrades-containers {
     margin: 0 auto;
+  }
+
+  #inv-display {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .vehicles {
+    max-height: 245px;
+    min-height: 245px;
+    border: solid 1px rgba(0, 0, 0, 0.5);
+    border-radius: 1rem;
+    max-height: 300px;
+    min-height: 300px;
+  }
+
+  .vehicles a {
+    width: 100%;
+    max-height: 150px;
+    min-height: 150px;
+  }
+
+  .vehicles img {
+    width: 100%;
+  }
+
+  .namePrice h2 {
+    font-size: 1.2rem;
+    padding: 0;
+    text-align: center;
   }
 }
 
@@ -223,4 +291,15 @@
     padding-bottom: 1.8rem;
   }
   
+  #inv-display {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .namePrice {
+    gap: 0.6rem;
+  }
+
+  .namePrice hr {
+    height: 4px;
+  }
 }
