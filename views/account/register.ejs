@@ -8,6 +8,14 @@
 <!-- Message block -->
 <%- messages() %>
 
+<% if (errors) { %>
+  <ul class="notice">
+  <% errors.array().forEach(error => { %>
+    <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+  <% } %>
+
 <!-- Form -->
 <div class="form">
   <form action="/account/register" method="post">
