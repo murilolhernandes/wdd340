@@ -244,14 +244,31 @@ fieldset legend {
   gap: 0.6rem;
 }
 
-label, .register, input[type="submit"] {
+input:required {
+  border-top: 1px solid black;
+  border-right: 1px solid black;
+  border-left: 1px solid black;
+  border-bottom: 5px solid red;
+}
+
+input:valid {
+  border-top: 1px solid black;
+  border-right: 1px solid black;
+  border-left: 1px solid black;
+  border-bottom: 5px solid green;
+}
+
+label, .register, input[type="submit"], .password {
   color: white;
   font-family: "Roboto Slab";
 }
 
+.password {
+  font-weight: 300;
+}
+
 #account_firstname, #account_lastname, #account_email, #account_password {
   border-radius: 0.3rem;
-  border: 1px solid;
   padding: 0.3rem;
 }
 
