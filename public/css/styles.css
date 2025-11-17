@@ -56,6 +56,13 @@
   color: black;
 }
 
+.notice {
+  color: red;
+  font-style: italic;
+  font-weight: bold;
+  font-family: "Roboto Slab";
+}
+
 .welcome-message, #hero-image-container, #main-content, h1, .namePrice, .vehicle-name {
   font-family: "Roboto Slab";
 
@@ -219,6 +226,64 @@
   background-color: rgba(128, 128, 128, 0.2);
 }
 
+fieldset {
+  border-radius: 0.8rem;
+  border: 2px solid gray;
+  background-color: rgb(25, 71, 124);
+  margin: 0 auto;
+  padding: 1.2rem;
+}
+
+fieldset legend {
+  display: none;
+}
+
+.information {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+label, .register, input[type="submit"] {
+  color: white;
+  font-family: "Roboto Slab";
+}
+
+#account_firstname, #account_lastname, #account_email, #account_password {
+  border-radius: 0.3rem;
+  border: 1px solid;
+  padding: 0.3rem;
+}
+
+input[type="submit"] {
+  border-radius: 0.8rem;
+  border: 1px solid;
+  margin: 0 auto;
+  padding:  0.3rem 0.8rem;
+  color: black;
+}
+
+.register {
+  text-align: center;
+  margin: 0;
+}
+
+.register a {
+  color: white;
+}
+
+.register-name, #show-password {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-family: "Roboto Slab";
+}
+
+#show-password {
+  font-size: 1rem;
+  font-weight: normal;
+}
+
 .error-message, .copyright, footer a {
   font-family: sans-serif;
 }
@@ -285,6 +350,15 @@
     font-size: 1.2rem;
     padding: 0;
     text-align: center;
+  }
+
+  .form {
+    max-width: 25rem;
+    margin: 0 auto;
+  }
+
+  fieldset {
+    padding: 1.2rem 4rem;
   }
 }
 

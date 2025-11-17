@@ -41,7 +41,6 @@ async function getVehicleByInvId(inv_id) {
   }
 }
 
-module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByClassificationId, getVehicleByInvId};
 /* ***************************
  *  Get classification name by classification_id
 * ************************** */
