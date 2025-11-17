@@ -244,11 +244,12 @@ fieldset legend {
   gap: 0.6rem;
 }
 
-input:required {
+input:required:invalid {
   border-top: 1px solid black;
   border-right: 1px solid black;
   border-left: 1px solid black;
   border-bottom: 5px solid red;
+  background-color: rgb(250, 213, 213);
 }
 
 input:valid {
@@ -256,6 +257,7 @@ input:valid {
   border-right: 1px solid black;
   border-left: 1px solid black;
   border-bottom: 5px solid green;
+  background-color: white;
 }
 
 label, .register, input[type="submit"], .password {
@@ -263,8 +265,14 @@ label, .register, input[type="submit"], .password {
   font-family: "Roboto Slab";
 }
 
+#account_email::placeholder {
+  color: rgb(63, 63, 63);
+}
+
 .password {
   font-weight: 300;
+  font-style: italic;
+  
 }
 
 #account_firstname, #account_lastname, #account_email, #account_password {
@@ -289,7 +297,7 @@ input[type="submit"] {
   color: white;
 }
 
-.register-name, #show-password {
+.required-fields, #show-password {
   color: white;
   font-size: 1.5rem;
   font-weight: bold;
@@ -299,6 +307,7 @@ input[type="submit"] {
 #show-password {
   font-size: 1rem;
   font-weight: normal;
+  cursor: pointer;
 }
 
 .error-message, .copyright, footer a {
