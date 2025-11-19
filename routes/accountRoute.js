@@ -17,6 +17,12 @@ router.post('/register',
   regValidate.checkRegData,
   utilities.handleErrors(accountController.registerAccount))
 
+// Route to post the login
+router.post('/login',
+  regValidate.loginRules(),
+  regValidate.checkLoginData,
+  utilities.handleErrors(accountController.login))
+
 // Route to build sever error page
 router.get("/trigger-error", utilities.handleErrors(accountController.triggerError));
 
