@@ -36,6 +36,80 @@ invCont.buildByVehicleId = async function (req, res, next) {
 }
 
 /* ***************************
+ *  Build management view
+* ************************** */
+invCont.buildManagementView = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("./inventory/management", {
+    title: "Vehicle Management",
+    nav,
+    // errors: null,
+  })
+}
+
+/* ***************************
+ *  Deliver add classification view
+* ************************** */
+invCont.buildAddClassificationView = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("./inventory/add-classification", {
+    title: "Add Classification",
+    nav,
+  })
+}
+
+/* ***************************
+ *  Get classification name by classification_id
+* ************************** */
+invCont.buildAddClassificationForm = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  const { classification_name } = req.body
+
+  const addResult = await invModel.addClassification(
+    classification_name
+  )
+
+  if (addResult) {
+    req.flash(
+      "notice",
+      `The ${classification_name} was successfully added.`
+    )
+    res.status(201).render("inv/", {
+      title: "Vehicle Management",
+      nav,
+    })
+  } else {
+    req.flash("notice", "Provide a correct classification name.")
+    res.status(501).render("./add-classification", {
+      title: "Add Classification",
+      nav,
+    })
+  }
+}
+
+
+/* ***************************
+ *  Deliver add inventory view
+* ************************** */
+invCont.buildAddInventoryView = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("./inventory/add-inventory", {
+    title: "Add to Inventory",
+    nav,
+  })
+}
+
+/* ***************************
+ *  Build add inventory view
+* ************************** */
+invCont.buildAddInventoryForm = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  const { inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id } = req.body
+
+
+}
+
+/* ***************************
  *  Trigger an intentional error view
 * ************************** */
 invCont.triggerError = async function (req, res, next) {
