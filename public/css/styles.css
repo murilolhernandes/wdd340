@@ -244,7 +244,7 @@ fieldset legend {
   gap: 0.6rem;
 }
 
-input:required:invalid {
+input:required:invalid, textarea:required:invalid, select:required:invalid {
   border-top: 1px solid black;
   border-right: 1px solid black;
   border-left: 1px solid black;
@@ -252,7 +252,7 @@ input:required:invalid {
   background-color: rgb(250, 213, 213);
 }
 
-input:valid {
+input:valid, textarea:valid, select:valid {
   border-top: 1px solid black;
   border-right: 1px solid black;
   border-left: 1px solid black;
@@ -260,7 +260,7 @@ input:valid {
   background-color: white;
 }
 
-label, .register, input[type="submit"], .password {
+label, .register, input[type="submit"], .password, .info {
   color: white;
   font-family: "Roboto Slab";
 }
@@ -269,13 +269,14 @@ label, .register, input[type="submit"], .password {
   color: rgb(63, 63, 63);
 }
 
-.password {
+.password, .info {
   font-weight: 300;
   font-style: italic;
   
 }
 
-#account_firstname, #account_lastname, #account_email, #account_password {
+#account_firstname, #account_lastname, #account_email, #account_password, #classification_name,
+#inv_make, #inv_model, #inv_description, #inv_image, #inv_thumbnail, #inv_price, #inv_year, #inv_miles, #inv_color {
   border-radius: 0.3rem;
   padding: 0.3rem;
 }
@@ -312,6 +313,10 @@ input[type="submit"] {
 
 .error-message, .copyright, footer a {
   font-family: sans-serif;
+}
+
+.info {
+  font-size: 0.9rem;
 }
 /* ---------------- Large View ---------------- */
 

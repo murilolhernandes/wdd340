@@ -18,26 +18,48 @@
 
 <!-- Form -->
 <div class="form">
-  <form action="/account/register" method="post">
+  <form action="/inv/add-inventory" method="post">
     <fieldset>
-      <legend>Register</legend>
+      <legend>Add Inventory</legend>
       <div class="information">
         <p class="required-fields">All fields are required.</p>
-        <label for="account_firstname">First Name:</label>
-        <input type="text" id="account_firstname" name="account_firstname" title="Your first name" autocapitalize="given-name" required value="<%= locals.account_firstname %>">
+        <label for="classification_name">Classification</label>
+        <select id="classification_name" name="classification_name" required>
+          <option value disabled selected>Select a classification</option>
+          <option value="custom">Custom</option>
+          <option value="sedan">Sedan</option>
+          <option value="sport">Sport</option>
+          <option value="suv">SUV</option>
+          <option value="truck">Truck</option>
+        </select>
+        <label for="inv_make">Make</label>
+        <input type="text" id="inv_make" name="inv_make" title="Make of vehicle" placeholder="Min of 3 characters" required value="<%= locals.inv_make %>">
 
-        <label for="account_lastname">Last Name:</label>
-        <input type="text" id="account_lastname" name="account_lastname" title="Your last name" autocomplete="family-name" required value="<%= locals.account_lastname %>">
+        <label for="inv_model">Model</label>
+        <input type="text" id="inv_model" name="inv_model" title="Model of vehicle" placeholder="Min of 3 characters" required value="<%= locals.inv_model %>">
 
-        <label for="account_email">Email:</label>
-        <input type="email" id="account_email" name="account_email" title="Your email address" placeholder="Enter a valid email address" autocomplete="email" required value="<%= locals.account_email %>">
+        <label for="inv_description">Description</label>
+        <textarea id="inv_description" name="inv_description" title="Description of the vehicle" rows="6" cols="20" required value="<%= locals.inv_description %>"></textarea>
         
-        <label for="account_password">Password:</label>
-        <input type="password" id="account_password" name="account_password" title="Enter a valid password" autocomplete="current-password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
-        <span class="password">Password must be at least 12 characters, contain at least 1 capital letter, contain at least 1 number, and contain at least 1 special character.</span>
-        <span id="show-password">Show Password</span>
+        <label for="inv_image">Image Path</label>
+        <input type="url" id="inv_image" name="inv_image" title="Image path of vehicle" required value="<%= locals.inv_image %>">
+
+        <label for="inv_thumbnail">Thumbnail Path</label>
+        <input type="url" id="inv_thumbnail" name="inv_thumbnail" title="Thumbnail path of vehicle" required value="<%= locals.inv_thumbnail %>">
         
-        <input type="submit" value="Register">
+        <label for="inv_price">Price</label>
+        <input type="number" id="inv_price" name="inv_price" title="Price of the vehicle" placeholder="decical or integer" required value="<%= locals.inv_price %>">
+
+        <label for="inv_year">Year</label>
+        <input type="number" id="inv_year" name="inv_year" title="Year of the vehicle" placeholder="4-digit year" required value="<%= locals.inv_year %>">
+
+        <label for="inv_miles">Miles</label>
+        <input type="number" id="inv_miles" name="inv_miles" title="Miles on the vehicle" placeholder="digits only" required value="<%= locals.inv_miles %>">
+
+        <label for="inv_color">Color</label>
+        <input type="text" id="inv_color" name="inv_color" title="Color of the vehicle" required value="<%= locals.inv_color %>">
+
+        <input type="submit" value="Add Vehicle">
       </div>
     </fieldset>
   </form>

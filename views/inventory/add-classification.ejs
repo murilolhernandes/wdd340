@@ -18,26 +18,17 @@
 
 <!-- Form -->
 <div class="form">
-  <form action="/account/register" method="post">
+  <form action="/inv/add-classification" method="post">
     <fieldset>
-      <legend>Register</legend>
+      <legend>Classification Name</legend>
       <div class="information">
-        <p class="required-fields">All fields are required.</p>
-        <label for="account_firstname">First Name:</label>
-        <input type="text" id="account_firstname" name="account_firstname" title="Your first name" autocapitalize="given-name" required value="<%= locals.account_firstname %>">
-
-        <label for="account_lastname">Last Name:</label>
-        <input type="text" id="account_lastname" name="account_lastname" title="Your last name" autocomplete="family-name" required value="<%= locals.account_lastname %>">
-
-        <label for="account_email">Email:</label>
-        <input type="email" id="account_email" name="account_email" title="Your email address" placeholder="Enter a valid email address" autocomplete="email" required value="<%= locals.account_email %>">
+        <!-- <h1 class="classification">Classification Name</h1> -->
+        <label for="classification_name">Classification Name</label>
+        <!-- <p class="required-fields">All fields are required.</p> -->
+        <span class="info">NAME MUST BE ALPHABETIC CHARACTERS ONLY.</span>
+        <input type="text" id="classification_name" name="classification_name" title="Classification name" required value="<%= locals.classification_name %>">
         
-        <label for="account_password">Password:</label>
-        <input type="password" id="account_password" name="account_password" title="Enter a valid password" autocomplete="current-password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
-        <span class="password">Password must be at least 12 characters, contain at least 1 capital letter, contain at least 1 number, and contain at least 1 special character.</span>
-        <span id="show-password">Show Password</span>
-        
-        <input type="submit" value="Register">
+        <input type="submit" value="Add Classification">
       </div>
     </fieldset>
   </form>

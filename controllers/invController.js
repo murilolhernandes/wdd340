@@ -55,6 +55,7 @@ invCont.buildAddClassificationView = async function (req, res, next) {
   res.render("./inventory/add-classification", {
     title: "Add Classification",
     nav,
+    errors: null,
   })
 }
 
@@ -87,7 +88,6 @@ invCont.buildAddClassificationForm = async function (req, res, next) {
   }
 }
 
-
 /* ***************************
  *  Deliver add inventory view
 * ************************** */
@@ -96,6 +96,7 @@ invCont.buildAddInventoryView = async function (req, res, next) {
   res.render("./inventory/add-inventory", {
     title: "Add to Inventory",
     nav,
+    errors: null,
   })
 }
 
