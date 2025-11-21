@@ -84,12 +84,25 @@ async function addInventory(classification_name) {
   }
 }
 
-async function checkExistingClass(classification_name) {
+async function checkExistingClassByName(classification_name) {
   try {
     const data = await pool.query(
-      `SELECT * FROM public.classification WHERE ${classification_name} = $1`, [classification_name]
+      `SELECT * FROM public.classification WHERE classification_name = $1`, [classification_name]
     )
     return data.rowCount
+  } catch (error) {
+    return error.message
+  }
+}
+
+/* **********************
+ *   Check for existing classification by ID
+* ********************* */
+async function checkExistingClassById(classification_id) {
+  try {
+    const sql = "SELECT * FROM public.classification WHERE classification_id = $1"
+    const result = await pool.query(sql, [classification_id])
+    return result.rowCount
   } catch (error) {
     return error.message
   }
@@ -106,4 +119,4 @@ async function addInventory(classification_id, inv_make, inv_model, inv_descript
   }
 }
 
-module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByClassificationId, getVehicleByInvId, getClassificationNameById, addClassification, addInventory, checkExistingClass};
+module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByClassificationId, getVehicleByInvId, getClassificationNameById, addClassification, addInventory, checkExistingClassByName, checkExistingClassById};

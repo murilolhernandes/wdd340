@@ -12,7 +12,7 @@ validate.classificationRules = () => {
       .bail()
       .isAlpha().withMessage("No spaces or special characters.")
       .custom(async (classification_name) => {
-        const classificationExists = await invModel.checkExistingClass(classification_name)
+        const classificationExists = await invModel.checkExistingClassByName(classification_name)
         if (classificationExists){
           throw new Error("Classification exists. Please insert a new classification")
         }
@@ -44,7 +44,7 @@ validate.inventoryRules = () => {
       .notEmpty().withMessage("Please select a classification.")
       .bail()
       .custom(async (classification_id) => {
-        const classificationExists = await invModel.checkExistingClass(classification_id)
+        const classificationExists = await invModel.checkExistingClassById(classification_id)
         if (!classificationExists){
           throw new Error("Classification selected is not in the list of classifications. Please choose an existing one")
         }
