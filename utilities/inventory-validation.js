@@ -40,7 +40,7 @@ validate.checkClassificationData = async (req, res, next) => {
 validate.inventoryRules = () => {
   return [
     // classification is required and must be in the DB
-    body("classification_name")
+    body("classification_id")
       .notEmpty().withMessage("Please select a classification.")
       .bail()
       .custom(async (classification_id) => {
