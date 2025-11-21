@@ -87,9 +87,20 @@ async function addInventory(classification_name) {
 async function checkExistingClass(classification_name) {
   try {
     const data = await pool.query(
-      "SELECT * FROM public.classification WHERE classification_name = $1", [classification_name]
+      `SELECT * FROM public.classification WHERE ${classification_name} = $1`, [classification_name]
     )
     return data.rowCount
+  } catch (error) {
+    return error.message
+  }
+}
+
+async function addInventory(classification_id, inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color){
+  try {
+    const data = await pool.query(
+      `INSERT INTO public.inventory (inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *`,
+      [inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id])
+      return data
   } catch (error) {
     return error.message
   }

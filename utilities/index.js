@@ -90,15 +90,16 @@ Util.buildVehicleDetailGrid = async function(data){
 /* **************************************
 * Build the vehicle information view HTML
 * ************************************ */
-Util.getClassificationsDropDown = async function(){
+Util.getClassificationsDropDown = async function(classification_id){
   let data = await invModel.getClassifications()
-  let options = '<select id="classification_name" name="classification_name" required>'
-  options += '<option value disabled selected>Select a classification</option>'
+  let options = '<option value="">Select a classification</option>'
   data.rows.forEach((row) => {
-    options += `<option value="${row.classification_id}">${this.capitalizeFirstLetter(row.classification_name)}</option>`
-    // options += `<option value="${row.classification_name}">${this.capitalizeFirstLetter(row.classification_name)}</option>`
+    options += `<option value="${row.classification_id}"`
+    if (classification_id != null && row.classification_id == classification_id) {
+      options += " selected"
+    }
+    options += `>${this.capitalizeFirstLetter(row.classification_name)}</option>`
   })
-  options += '</select>'
   return options
 }
 

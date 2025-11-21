@@ -29,6 +29,12 @@ router.post("/add-classification",
   invValidate.checkClassificationData,
   utilities.handleErrors(invController.buildAddClassificationForm));
 
+// Route to post the inventory
+router.post("/add-inventory",
+  invValidate.inventoryRules(),
+  invValidate.checkInventoryData,
+  utilities.handleErrors(invController.buildAddInventoryForm));
+
 // Route to build server error page
 // router.get("/trigger-error", utilities.handleErrors(invController.triggerError));
 

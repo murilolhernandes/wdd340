@@ -272,10 +272,9 @@ label, .register, input[type="submit"], .password, .info {
 .password, .info {
   font-weight: 300;
   font-style: italic;
-  
 }
 
-#account_firstname, #account_lastname, #account_email, #account_password, #classification_name,
+#account_firstname, #account_lastname, #account_email, #account_password, #classification_name, #classification_id,
 #inv_make, #inv_model, #inv_description, #inv_image, #inv_thumbnail, #inv_price, #inv_year, #inv_miles, #inv_color {
   border-radius: 0.3rem;
   padding: 0.3rem;
@@ -323,6 +322,11 @@ input[type="submit"] {
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
+}
+
+textarea {
+  font-family: arial;
+  font-size: 13.333px;
 }
 /* ---------------- Large View ---------------- */
 
