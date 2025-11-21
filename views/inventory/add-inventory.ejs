@@ -24,19 +24,13 @@
       <div class="information">
         <p class="required-fields">All fields are required.</p>
         <label for="classification_name">Classification</label>
-        <select id="classification_name" name="classification_name" required>
-          <option value disabled selected>Select a classification</option>
-          <option value="custom">Custom</option>
-          <option value="sedan">Sedan</option>
-          <option value="sport">Sport</option>
-          <option value="suv">SUV</option>
-          <option value="truck">Truck</option>
-        </select>
+        <% if (dropDownClassification) { %> <%- dropDownClassification %> <% }
+        %>
         <label for="inv_make">Make</label>
-        <input type="text" id="inv_make" name="inv_make" title="Make of vehicle" placeholder="Min of 3 characters" required value="<%= locals.inv_make %>">
+        <input type="text" id="inv_make" name="inv_make" title="Make of vehicle" placeholder="Min of 3 characters" minlength="3" required value="<%= locals.inv_make %>">
 
         <label for="inv_model">Model</label>
-        <input type="text" id="inv_model" name="inv_model" title="Model of vehicle" placeholder="Min of 3 characters" required value="<%= locals.inv_model %>">
+        <input type="text" id="inv_model" name="inv_model" title="Model of vehicle" placeholder="Min of 3 characters" minlength="3" required value="<%= locals.inv_model %>">
 
         <label for="inv_description">Description</label>
         <textarea id="inv_description" name="inv_description" title="Description of the vehicle" rows="6" cols="20" required value="<%= locals.inv_description %>"></textarea>

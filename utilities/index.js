@@ -87,6 +87,24 @@ Util.buildVehicleDetailGrid = async function(data){
   return grid
 }
 
+/* **************************************
+* Build the vehicle information view HTML
+* ************************************ */
+Util.getClassificationsDropDown = async function(req, res, next){
+  let data = await invModel.getClassifications()
+  let options = '<select id="classification_name" name="classification_name" required>'
+  options += '<option value disabled selected>Select a classification</option>'
+  data.rows.forEach((row) => {
+    options += `<option value="${row.classification_name}">${this.capitalizeFirstLetter(row.classification_name)}</option>`
+  })
+  options += '</select>'
+  return options
+}
+
+Util.capitalizeFirstLetter = function(string){
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 

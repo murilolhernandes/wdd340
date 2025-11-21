@@ -90,9 +90,11 @@ invCont.buildAddClassificationForm = async function (req, res) {
 * ************************** */
 invCont.buildAddInventoryView = async function (req, res, next) {
   let nav = await utilities.getNav()
+  let dropDownClassification = await utilities.getClassificationsDropDown()
   res.render("./inventory/add-inventory", {
     title: "Add to Inventory",
     nav,
+    dropDownClassification,
     errors: null,
   })
 }
