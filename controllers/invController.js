@@ -75,10 +75,7 @@ invCont.buildAddClassificationForm = async function (req, res) {
       "notice",
       `The ${classification_name} was successfully added.`
     )
-    res.status(201).render("inventory/management", {
-      title: "Vehicle Management",
-      nav,
-    })
+    res.status(201).redirect("/inv/")
   } else {
     req.flash("notice", "Provide a correct classification name.")
     res.status(501).render("./inventory/add-classification", {
