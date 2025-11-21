@@ -62,7 +62,7 @@ invCont.buildAddClassificationView = async function (req, res, next) {
 /* ***************************
  *  Get classification name by classification_id
 * ************************** */
-invCont.buildAddClassificationForm = async function (req, res, next) {
+invCont.buildAddClassificationForm = async function (req, res) {
   let nav = await utilities.getNav()
   const { classification_name } = req.body
 
@@ -75,13 +75,13 @@ invCont.buildAddClassificationForm = async function (req, res, next) {
       "notice",
       `The ${classification_name} was successfully added.`
     )
-    res.status(201).render("inv/", {
+    res.status(201).render("inventory/management", {
       title: "Vehicle Management",
       nav,
     })
   } else {
     req.flash("notice", "Provide a correct classification name.")
-    res.status(501).render("./add-classification", {
+    res.status(501).render("./inventory/add-classification", {
       title: "Add Classification",
       nav,
     })
@@ -103,12 +103,12 @@ invCont.buildAddInventoryView = async function (req, res, next) {
 /* ***************************
  *  Build add inventory view
 * ************************** */
-invCont.buildAddInventoryForm = async function (req, res, next) {
-  let nav = await utilities.getNav()
-  const { inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id } = req.body
+// invCont.buildAddInventoryForm = async function (req, res, next) {
+//   let nav = await utilities.getNav()
+//   const { inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id } = req.body
 
 
-}
+// }
 
 /* ***************************
  *  Trigger an intentional error view

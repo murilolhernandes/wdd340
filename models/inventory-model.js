@@ -83,4 +83,16 @@ async function addInventory(classification_name) {
     return error.message
   }
 }
-module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByClassificationId, getVehicleByInvId, getClassificationNameById, addClassification, addInventory};
+
+async function checkExistingClass(classification_name) {
+  try {
+    const data = await pool.query(
+      "SELECT * FROM public.classification WHERE classification_name = $1", [classification_name]
+    )
+    return data.rowCount
+  } catch (error) {
+    return error.message
+  }
+}
+
+module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByClassificationId, getVehicleByInvId, getClassificationNameById, addClassification, addInventory, checkExistingClass};

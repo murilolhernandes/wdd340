@@ -311,12 +311,18 @@ input[type="submit"] {
   cursor: pointer;
 }
 
-.error-message, .copyright, footer a {
+.error-message, .copyright, footer a, #links a {
   font-family: sans-serif;
 }
 
 .info {
   font-size: 0.9rem;
+}
+
+#links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
 }
 /* ---------------- Large View ---------------- */
 
