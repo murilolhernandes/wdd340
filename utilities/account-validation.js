@@ -35,12 +35,6 @@ validate.loginRules = () => {
         minUppercase: 1,
         minNumbers: 1,
         minSymbols: 1,
-      }).withMessage("Password does not meet requirements.")
-      .custom(async (account_password) => {
-        const passwordExists = await accountModel.checkExistingPassword(account_password)
-        if (!passwordExists) {
-          throw new Error("Password does not match the email address. Please enter a valid password.")
-        }
       }),
   ]
 }

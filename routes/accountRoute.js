@@ -15,13 +15,16 @@ router.get("/register", utilities.handleErrors(accountController.buildRegister))
 router.post('/register',
   regValidate.registrationRules(),
   regValidate.checkRegData,
-  utilities.handleErrors(accountController.registerAccount))
+  utilities.handleErrors(accountController.registerAccount));
 
 // Route to post the login
 router.post('/login',
   regValidate.loginRules(),
   regValidate.checkLoginData,
-  utilities.handleErrors(accountController.login))
+  utilities.handleErrors(accountController.accountLogin));
+
+// Route to account management view
+router.get("/", utilities.handleErrors(accountController.buildManagementView));
 
 // Route to build sever error page
 router.get("/trigger-error", utilities.handleErrors(accountController.triggerError));
