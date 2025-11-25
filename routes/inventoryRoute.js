@@ -40,6 +40,19 @@ router.get("/getInventory/:classification_id",
   // invValidate.checkAccountType,
   utilities.handleErrors(invController.getInventoryJSON));
 
+// Route to build the modify inventory view
+router.get("/edit/:invId", utilities.handleErrors(invController.buildModifyView));
+
+// Route to post the modification form
+router.post("/update/",
+  // invValidate.newInventoryRules(),
+  invValidate.inventoryRules(),
+  invValidate.checkUpdateData,
+  utilities.handleErrors(invController.updateInventory));
+
+// Route to build the modify inventory view
+// router.get("/delete/:invId", utilities.handleErrors(invController.buildDelete));
+
 // Route to build server error page
 // router.get("/trigger-error", utilities.handleErrors(invController.triggerError));
 
