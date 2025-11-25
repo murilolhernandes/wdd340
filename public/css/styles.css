@@ -328,6 +328,17 @@ textarea {
   font-family: arial;
   font-size: 13.333px;
 }
+
+#inv-manipulation {
+  display: flex;
+  flex-direction: column;
+}
+
+#classificationList {
+  display: flex;
+  flex-direction: column;
+  color: black;
+}
 /* ---------------- Large View ---------------- */
 
 @media (min-width: 500px) {

@@ -24,7 +24,9 @@ router.post('/login',
   utilities.handleErrors(accountController.accountLogin));
 
 // Route to account management view
-router.get("/", utilities.handleErrors(accountController.buildManagementView));
+router.get("/", 
+  utilities.checkLogin,
+  utilities.handleErrors(accountController.buildManagementView));
 
 // Route to build sever error page
 router.get("/trigger-error", utilities.handleErrors(accountController.triggerError));

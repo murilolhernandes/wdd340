@@ -40,10 +40,12 @@ invCont.buildByVehicleId = async function (req, res, next) {
 * ************************** */
 invCont.buildManagementView = async function (req, res, next) {
   let nav = await utilities.getNav()
+  const classificationSelect = await utilities.getClassificationsDropDown()
   res.render("./inventory/management", {
     title: "Vehicle Management",
     nav,
-    // errors: null,
+    errors: null,
+    classificationSelect,
   })
 }
 
@@ -130,6 +132,19 @@ invCont.buildAddInventoryForm = async function (req, res, next) {
       title: "Add to Inventory",
       nav,
     })
+  }
+}
+
+/* ***************************
+ *  Return Inventory by Classification as JSON
+* ************************** */
+invCont.getInventoryJSON = async (req, res, next) => {
+  const classification_id = parseInt(req.params.classification_id)
+  const invData = await invModel.getInventoryByClassificationId(classification_id)
+  if (invData[0].inv_id) {
+    return res.json(invData)
+  } else {
+    next(new Error("No data returned"))
   }
 }
 

@@ -35,6 +35,11 @@ router.post("/add-inventory",
   invValidate.checkInventoryData,
   utilities.handleErrors(invController.buildAddInventoryForm));
 
+// Route to build the inventory for AJAX route
+router.get("/getInventory/:classification_id",
+  // invValidate.checkAccountType,
+  utilities.handleErrors(invController.getInventoryJSON));
+
 // Route to build server error page
 // router.get("/trigger-error", utilities.handleErrors(invController.triggerError));
 

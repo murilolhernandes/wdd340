@@ -12,3 +12,17 @@
   <a href="/inv/add-classification">Add New Classification</a>
   <a href="/inv/add-inventory">Add New Vehicle</a>
 </div>
+
+<div id="inv-manipulation">
+  <h1>Manage Inventory</h1>
+  <div id="class-label">
+    <label for="classification_id" id="classificationList">Choose a classification to see those inventory items.</label>
+    <select id="classification_id" name="classification_id">
+      <%- classificationSelect %></select>
+  </div>
+  <table id="inventoryDisplay"></table>
+</div>
+
+<noscript>JavaScript must be enabled to use this page.</noscript>
+
+<script src="../../js/inventory.js"></script>
