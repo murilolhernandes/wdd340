@@ -9,7 +9,7 @@ const invValidate = require('../utilities/inventory-validation')
 router.get("/type/:classificationId", utilities.handleErrors(invController.buildByClassificationId));
 
 // Route to build vehicle information by vehicle view
-router.get("/detail/:invId", utilities.handleErrors(invController.buildByVehicleId));
+router.get("/detail/:inv_id", utilities.handleErrors(invController.buildByVehicleId));
 
 // Route to build sever error view
 router.get("/trigger-error", utilities.handleErrors(invController.triggerError));
@@ -41,7 +41,7 @@ router.get("/getInventory/:classification_id",
   utilities.handleErrors(invController.getInventoryJSON));
 
 // Route to build the modify inventory view
-router.get("/edit/:invId", utilities.handleErrors(invController.buildModifyView));
+router.get("/edit/:inv_id", utilities.handleErrors(invController.buildModifyView));
 
 // Route to post the modification form
 router.post("/update/",
@@ -51,7 +51,11 @@ router.post("/update/",
   utilities.handleErrors(invController.updateInventory));
 
 // Route to build the modify inventory view
-// router.get("/delete/:invId", utilities.handleErrors(invController.buildDelete));
+router.get("/delete/:inv_id", utilities.handleErrors(invController.buildDeleteConfirmationView));
+
+// Route to post the delete inventory
+router.post("/delete/",
+  utilities.handleErrors(invController.deleteInventory));
 
 // Route to build server error page
 // router.get("/trigger-error", utilities.handleErrors(invController.triggerError));

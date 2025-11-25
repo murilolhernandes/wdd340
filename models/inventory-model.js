@@ -133,4 +133,18 @@ async function updateInventory(classification_id, inv_make, inv_model, inv_descr
   }
 }
 
-module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByClassificationId, getVehicleByInvId, getClassificationNameById, addClassification, addInventory, checkExistingClassByName, checkExistingClassById, updateInventory};
+/* **********************
+ *   Dlete Inventory Data
+* ********************* */
+async function deleteInventoryItem(inv_id){
+  try {
+    const data = await pool.query(
+      `DELETE FROM public.inventory WHERE inv_id = $1`,
+      [inv_id])
+      return data
+  } catch (error) {
+    new Error("Delete Inventory Error")
+  }
+}
+
+module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByClassificationId, getVehicleByInvId, getClassificationNameById, addClassification, addInventory, checkExistingClassByName, checkExistingClassById, updateInventory, deleteInventoryItem};
