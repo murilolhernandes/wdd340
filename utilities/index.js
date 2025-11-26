@@ -147,7 +147,7 @@ Util.checkLogin = (req, res, next) => {
     next()
   } else {
     req.flash("notice", "Please log in.")
-    return res.redirect("/account/loginI@mAnAdm!n1strat0r")
+    return res.redirect("/account/login")
   }
 }
 

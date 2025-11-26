@@ -1,0 +1,50 @@
+<!-- Content heading -->
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<!-- Message block -->
+<%- messages() %>
+
+<% if (errors) { %>
+  <ul class="notice">
+  <% errors.array().forEach(error => { %>
+    <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+  <% } %>
+
+<!-- Form -->
+<div class="form">
+  <form id="updateForm" action="/account/update" method="post">
+    <fieldset>
+      <legend>Edit Account</legend>
+      <div class="information">
+        <p class="required-fields">All fields are required.</p>
+        <label for="account_firstname">First Name:</label>
+        <input type="text" id="account_firstname" name="account_firstname" title="Your first name" autocapitalize="given-name" required value="<%= locals.account_firstname %>">
+
+        <label for="account_lastname">Last Name:</label>
+        <input type="text" id="account_lastname" name="account_lastname" title="Your last name" autocomplete="family-name" required value="<%= locals.account_lastname %>">
+
+        <label for="account_email">Email:</label>
+        <input type="email" id="account_email" name="account_email" title="Your email address" placeholder="Enter a valid email address" autocomplete="email" required value="<%= locals.account_email %>">
+        
+        <input type="submit" id="accountUpdate" value="Update Account" disabled>
+        <input type="hidden" name="account_id"
+        <% if(locals.account_id) { %> value="<%= locals.account_id %>"
+        <% } %>>
+
+        <!-- <label for="account_password">Password:</label>
+        <input type="password" id="account_password" name="account_password" title="Enter a valid password" autocomplete="current-password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
+        <span class="password">Password must be at least 12 characters, contain at least 1 capital letter, contain at least 1 number, and contain at least 1 special character.</span>
+        <span id="show-password">Show Password</span> -->
+        <!-- <input type="submit" id="passwordUpdate" value="Update Password" disabled> -->
+      </div>
+    </fieldset>
+  </form>
+</div>
+
+<script src="../../js/account-update.js"></script>

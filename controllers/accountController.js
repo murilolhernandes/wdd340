@@ -97,16 +97,19 @@ async function accountLogin(req, res) {
     return
   }
   try {
-    if (await bcrypt.compare(account_password, accountData.account_password)) {
+    if (await bcrypt.compare(account_password, accountData.account_password)) 
+    {
       delete accountData.account_password
       const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
-      if(process.env.NODE_ENV === 'development') {
+      if(process.env.NODE_ENV === 'development') 
+      {
         res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
       } else {
         res.cookie("jwt", accessToken, { httpOnly: true, secure: true, maxAge: 3600 * 1000 })
       }
       return res.redirect("/account/")
-    } else {
+    } 
+    else {
       req.flash("message notice", "Please check your credentials and try again.")
       res.status(400).render("account/login", {
         title: "Login",
@@ -125,11 +128,69 @@ async function accountLogin(req, res) {
 * ************************** */
 async function buildManagementView(req, res, next) {
   let nav = await utilities.getNav()
+  const account_firstname = res.locals.accountData.account_firstname
   res.render("account/management", {
     title: "Account Management",
     nav,
+    account_firstname,
     errors: null,
   })
 }
 
-module.exports = { buildLogin, buildRegister, accountLogin, registerAccount, buildManagementView }
+/* ***************************
+ *  Deliver edit account information view
+* ************************** */
+async function buildEditAccInfoView(req, res, next) {
+  let nav = await utilities.getNav()
+  // const { account_firstname, account_lastname, account_email, account_password } = req.body
+  // const account_email = res.locals.accountData.account_email
+  // const accountData = await accountModel.getAccountByEmail(account_email)
+  const account_id = res.locals.accountData.account_id
+  const accountData = await accountModel.getAccountById(account_id)
+  res.render("account/edit-account", {
+    title: "Edit Account",
+    nav,
+    errors: null,
+    account_firstname: accountData.account_firstname,
+    account_lastname: accountData.account_lastname,
+    account_email: accountData.account_email,
+    account_id: accountData.account_id,
+    // account_password: accountData.account_password,
+  })
+}
+
+/* ***************************
+ *  Update Account Data
+* ************************** */
+async function updateAccount(req, res, next) {
+  let nav = await utilities.getNav()
+  const { account_firstname, account_lastname, account_email, account_id } = req.body
+
+  const updateResult = await accountModel.updateAccount(
+    account_firstname,
+    account_lastname,
+    account_email,
+    account_id,
+  )
+
+  if (updateResult) {
+    req.flash(
+      "notice", "Congratulations, your information has been updated."
+    )
+    res.status(201).redirect("/account")
+  } else {
+    req.flash("notice", "Sorry the update failed.")
+    res.status(501).render("/account/edit-account", {
+    title: "Edit Account",
+    nav,
+    errors: null,
+    account_firstname,
+    account_lastname,
+    account_email,
+    account_id,
+    // account_password,
+    })
+  }
+}
+
+module.exports = { buildLogin, buildRegister, accountLogin, registerAccount, buildManagementView, buildEditAccInfoView, updateAccount }

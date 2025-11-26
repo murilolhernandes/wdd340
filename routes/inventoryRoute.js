@@ -45,7 +45,6 @@ router.get("/edit/:inv_id", utilities.handleErrors(invController.buildModifyView
 
 // Route to post the modification form
 router.post("/update/",
-  // invValidate.newInventoryRules(),
   invValidate.inventoryRules(),
   invValidate.checkUpdateData,
   utilities.handleErrors(invController.updateInventory));

@@ -228,7 +228,7 @@ invCont.updateInventory = async function (req, res, next) {
 }
 
 /* ***************************
- *  Build the edit view
+ *  Build the delete view
 * ************************** */
 invCont.buildDeleteConfirmationView = async function (req, res, next) {
   const inv_id = parseInt(req.params.inv_id)
