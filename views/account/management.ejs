@@ -20,4 +20,8 @@
   <h1>Welcome <%= account_firstname %></h1>
   <p>You're logged in.</p>
   <a href="/account/update">Edit Account Information</a>
+  <% if (locals.accountData.account_type == "Admin" || locals.accountData.account_type == "Employee") { %>
+    <h1>Inventory Management</h1>
+    <a href="/inv">Management Inventory</a>
+  <% } %>
 </div>

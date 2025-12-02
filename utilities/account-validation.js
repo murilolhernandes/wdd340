@@ -83,7 +83,6 @@ validate.registrationRules = () => {
       .isEmail({ if: body("account_email").notEmpty() })
       .withMessage("Please provide a valid email address.")
       .normalizeEmail({ gmail_remove_dots: false })
-      // .normalizeEmail()
       .custom(async (account_email) => {
         const emailExists = await accountModel.checkExistingEmail(account_email)
         if (emailExists){
@@ -129,20 +128,27 @@ validate.checkRegData = async (req, res, next) => {
 }
 
 validate.checkUpdateData = async (req, res, next) => {
-  const { account_firstname, account_lastname, account_email } = req.body
+  let { account_firstname, account_lastname, account_email, account_id } = req.body
   let errors = []
   errors = validationResult(req)
   if (!errors.isEmpty()) {
     let nav = await utilities.getNav()
-    // const account_firstname = res.locals.accountData.account_firstname
-    res.render("account/management", {
-      title: `Welcome ${account_firstname}`,
+    // If the error is from the password form, user data will be missing. Fetch it.
+    if (!account_firstname) {
+      const accountData = await accountModel.getAccountById(account_id)
+      account_firstname = accountData.account_firstname
+      account_lastname = accountData.account_lastname
+      account_email = accountData.account_email
+    }
+
+    res.render("account/edit-account", {
+      title: "Edit Account",
       nav,
       errors,
       account_firstname,
       account_lastname,
       account_email,
-      // account_password
+      account_id,
     })
     return
   }
@@ -169,26 +175,33 @@ validate.updateRules = () => {
       .isEmail({ if: body("account_email").notEmpty() })
       .withMessage("Please provide a valid email address.")
       .normalizeEmail({ gmail_remove_dots: false })
-      // .normalizeEmail()
-      .custom(async (account_email) => {
-        const emailExists = await accountModel.checkExistingEmail(account_email)
-        if (emailExists){
-          throw new Error("Email exists. Please log in or use different email.")
+      .custom(async (account_email, { req }) => {
+        const account_id = req.body.account_id
+        const accountData = await accountModel.getAccountById(account_id)
+        if (account_email != accountData.account_email){
+          const emailExists = await accountModel.checkExistingEmail(account_email)
+          if (emailExists){
+            throw new Error("Email exists. Please log in or use different email.")
+          }
         }
       }),
+  ]
+}
 
+validate.updatePassword = () => {
+  return [
     // password is required and must be strong password
-    // body("account_password")
-    //   .trim()
-    //   .notEmpty().withMessage("Password is required.")
-    //   .bail() // Prevents a second message from showing (aka "invalid value")
-    //   .isStrongPassword({
-    //     minLength: 12,
-    //     minLowercase: 1,
-    //     minUppercase: 1,
-    //     minNumbers: 1,
-    //     minSymbols: 1,
-    //   }).withMessage("Password does not meet requirements."),
+    body("account_password")
+      .trim()
+      .notEmpty().withMessage("Password is required.")
+      .bail() // Prevents a second message from showing (aka "invalid value")
+      .isStrongPassword({
+        minLength: 12,
+        minLowercase: 1,
+        minUppercase: 1,
+        minNumbers: 1,
+        minSymbols: 1,
+      }).withMessage("Password does not meet requirements."),
   ]
 }
 

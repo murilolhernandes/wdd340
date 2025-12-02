@@ -67,4 +67,18 @@ async function updateAccount(account_firstname, account_lastname, account_email,
   }
 }
 
-module.exports = { registerAccount, checkExistingEmail, getAccountById, getAccountByEmail, updateAccount }
+/* **********************
+ *   Update Password
+* ********************* */
+async function updateAccountPassword(account_password, account_id){
+  try {
+    const data = await pool.query(
+      `UPDATE public.account SET account_password = $1 WHERE account_id = $2 RETURNING *`,
+      [account_password, account_id])
+      return data.rows[0]
+  } catch (error) {
+    console.error(`model error: ${error}`)
+  }
+}
+
+module.exports = { registerAccount, checkExistingEmail, getAccountById, getAccountByEmail, updateAccount, updateAccountPassword }

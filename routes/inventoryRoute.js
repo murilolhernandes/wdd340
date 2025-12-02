@@ -15,7 +15,10 @@ router.get("/detail/:inv_id", utilities.handleErrors(invController.buildByVehicl
 router.get("/trigger-error", utilities.handleErrors(invController.triggerError));
 
 // Route to build management view
-router.get("/", utilities.handleErrors(invController.buildManagementView));
+router.get("/",
+  utilities.checkLogin,
+  utilities.checkLoginType,
+  utilities.handleErrors(invController.buildManagementView));
 
 // Route to build add-classification view
 router.get("/add-classification", utilities.handleErrors(invController.buildAddClassificationView));

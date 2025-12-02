@@ -32,10 +32,19 @@ router.get("/",
 router.get("/update", utilities.handleErrors(accountController.buildEditAccInfoView));
 
 // Route to post new account info
-router.post("/update",
+router.post("/update-info",
   regValidate.updateRules(),
   regValidate.checkUpdateData,
   utilities.handleErrors(accountController.updateAccount));
+
+// Route to post new password
+router.post("/update-password",
+  regValidate.updatePassword(),
+  regValidate.checkUpdateData,
+  utilities.handleErrors(accountController.updateAccountPassword));
+
+// Route to log the user out
+router.get("/logout", utilities.handleErrors(accountController.logout));
 
 // Route to build sever error page
 router.get("/trigger-error", utilities.handleErrors(accountController.triggerError));
