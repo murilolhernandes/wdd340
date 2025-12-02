@@ -339,6 +339,14 @@ textarea {
   flex-direction: column;
   color: black;
 }
+
+.management-view p, .management-view a {
+  font-family: sans-serif;
+}
+
+.star {
+  color: rgb(229, 255, 0);
+}
 /* ---------------- Large View ---------------- */
 
 @media (min-width: 500px) {
