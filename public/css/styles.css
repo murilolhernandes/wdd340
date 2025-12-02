@@ -413,6 +413,9 @@ textarea {
   }
 
   .form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
     max-width: 25rem;
     margin: 0 auto;
   }
