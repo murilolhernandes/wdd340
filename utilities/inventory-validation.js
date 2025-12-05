@@ -11,6 +11,10 @@ validate.classificationRules = () => {
       .notEmpty().withMessage("Classification name is required.")
       .bail()
       .isAlpha().withMessage("No spaces or special characters.")
+      .toLowerCase()
+      .custom((classification_name) => {
+        return classification_name.charAt(0).toUpperCase() + classification_name.slice(1)
+      })
       .custom(async (classification_name) => {
         const classificationExists = await invModel.checkExistingClassByName(classification_name)
         if (classificationExists){

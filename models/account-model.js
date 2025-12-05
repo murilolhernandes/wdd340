@@ -45,7 +45,7 @@ async function getAccountByEmail(account_email){
 async function getAccountById(account_id){
   try {
     const result = await pool.query(
-      'SELECT account_id, account_firstname, account_lastname, account_email, account_type, account_password FROM public.account WHERE account_id = $1',
+      'SELECT * FROM public.account WHERE account_id = $1',
       [account_id])
     return result.rows[0]
   } catch (error) {
@@ -100,4 +100,32 @@ async function getAccountTypes() {
   return await pool.query("SELECT unnest AS account_type FROM unnest(enum_range(NULL::account_type)) WHERE unnest <> 'SuperAdmin'")
 }
 
-module.exports = { registerAccount, checkExistingEmail, getAccountById, getAccountByEmail, updateAccount, updateAccountPassword, getAccountByType, getAccountTypes }
+/* ***************************
+ *  Check if the account type already exists by account type
+  * ************************** */
+async function checkExistingAccountType(account_type) {
+  try {
+    const data = await pool.query(
+      "SELECT 1 FROM unnest(enum_range(NULL::account_type)) WHERE unnest = $1 AND unnest <> 'SuperAdmin'", [account_type]
+    )
+    return data.rowCount
+  } catch (error) {
+    return error.message
+  }
+}
+
+/* **********************
+ *   Update User Account Data
+* ********************* */
+async function updateUserAccount(account_firstname, account_lastname, account_email, account_type, account_id){
+  try {
+    const data = await pool.query(
+      `UPDATE public.account SET account_firstname = $1, account_lastname = $2, account_email = $3, account_type = $4 WHERE account_id = $5 RETURNING *`,
+      [account_firstname, account_lastname, account_email, account_type, account_id])
+      return data.rows[0]
+  } catch (error) {
+    console.error(`model error: ${error}`)
+  }
+}
+
+module.exports = { registerAccount, checkExistingEmail, getAccountById, getAccountByEmail, updateAccount, updateAccountPassword, getAccountByType, getAccountTypes, checkExistingAccountType, updateUserAccount }

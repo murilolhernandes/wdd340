@@ -154,7 +154,6 @@ async function buildEditAccInfoView(req, res, next) {
     account_lastname: accountData.account_lastname,
     account_email: accountData.account_email,
     account_id: accountData.account_id,
-    // account_password: accountData.account_password,
   })
 }
 
@@ -252,7 +251,7 @@ async function logout(req, res, next) {
 }
 
 /* ***************************
- *  Return Inventory by Classification as JSON
+ *  Return account by account_type as JSON
 * ************************** */
 async function getAccountJSON(req, res, next){
   const account_type = req.params.account_type
@@ -264,4 +263,67 @@ async function getAccountJSON(req, res, next){
   }
 }
 
-module.exports = { buildLogin, buildRegister, accountLogin, registerAccount, buildManagementView, buildEditAccInfoView, updateAccount, updateAccountPassword, logout, getAccountJSON }
+/* ***************************
+ *  Build the edit view
+* ************************** */
+async function buildModifyAccountView(req, res, next) {
+  let nav = await utilities.getNav()
+  const account_id = parseInt(req.params.account_id)
+  const accountData = await accountModel.getAccountById(account_id)
+  const userName = `${accountData.account_firstname} ${accountData.account_lastname}`
+  const accountSelect = await utilities.getAccountDropDown(accountData.account_type)
+  res.render("account/modify-user-account", {
+    title: `Edit ${userName}'s Account`,
+    nav,
+    errors: null,
+    accountSelect: accountSelect,
+    account_firstname: accountData.account_firstname,
+    account_lastname: accountData.account_lastname,
+    account_email: accountData.account_email,
+    account_id: accountData.account_id,
+  })
+}
+
+/* ***************************
+ *  Update User Account Data
+* ************************** */
+async function updateUserAccount(req, res, next) {
+  let nav = await utilities.getNav()
+  const { account_firstname, account_lastname, account_email, account_type, account_id } = req.body
+
+  const updateResult = await accountModel.updateUserAccount(
+    account_firstname,
+    account_lastname,
+    account_email,
+    account_type,
+    account_id,
+  )
+
+  if (updateResult) {
+    // const accountData = await accountModel.getAccountById(account_id)
+    // delete accountData.account_password
+    // const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
+    // res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
+    const userName = `${updateResult.account_firstname} ${updateResult.account_lastname}`
+    req.flash(
+      "notice", `Congratulations, ${userName}'s information has been updated.`
+    )
+    res.status(201).redirect("/account")
+  } else {
+    const userName = `${account_firstname} ${account_lastname}`
+    const accountSelect = await utilities.getAccountDropDown(account_type)
+    req.flash("notice", "Sorry the update failed.")
+    res.status(501).render("account/modify-user-account", {
+    title: `Edit ${userName}'s Account`,
+    nav,
+    errors: null,
+    accountSelect,
+    account_firstname,
+    account_lastname,
+    account_email,
+    account_id,
+    })
+  }
+}
+
+module.exports = { buildLogin, buildRegister, accountLogin, registerAccount, buildManagementView, buildEditAccInfoView, updateAccount, updateAccountPassword, logout, getAccountJSON, buildModifyAccountView, updateUserAccount }

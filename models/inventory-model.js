@@ -84,6 +84,9 @@ async function addInventory(classification_name) {
   }
 }
 
+/* ***************************
+ *  Check if the classification name already exists by name
+  * ************************** */
 async function checkExistingClassByName(classification_name) {
   try {
     const data = await pool.query(

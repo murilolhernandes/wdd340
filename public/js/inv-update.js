@@ -1,5 +1,5 @@
 const form = document.querySelector("#updateForm")
-form.addEventListener("change", function () {
+form.addEventListener("input", function () {
   const updateBtn = document.querySelector('input[type="submit"]')
   updateBtn.removeAttribute("disabled")
 })

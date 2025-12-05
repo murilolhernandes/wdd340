@@ -132,6 +132,7 @@ invCont.buildAddInventoryForm = async function (req, res, next) {
     res.status(501).render("./inventory/add-inventory", {
       title: "Add to Inventory",
       nav,
+      // Do I need to fill this?
     })
   }
 }

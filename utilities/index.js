@@ -168,12 +168,12 @@ Util.checkLoginType = (req, res, next) => {
 /* **************************************
 * Build the account information view HTML
 * ************************************ */
-Util.getAccountDropDown = async function(account_id){
+Util.getAccountDropDown = async function(account_type){
   let data = await accModel.getAccountTypes()
   let options = '<option value="">Select an account type</option>'
   data.rows.forEach((row) => {
     options += `<option value="${row.account_type}"`
-    if (account_id != null && row.account_type == account_type) {
+    if (account_type != null && row.account_type == account_type) {
       options += " selected"
     }
     options += `>${row.account_type}</option>`

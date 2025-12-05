@@ -50,6 +50,15 @@ router.get("/logout", utilities.handleErrors(accountController.logout));
 router.get("/getAccount/:account_type",
   utilities.handleErrors(accountController.getAccountJSON));
 
+// Route to build the modify user account view
+router.get("/edit/:account_id", utilities.handleErrors(accountController.buildModifyAccountView));
+
+// Route to post new user account info
+router.post("/update-user",
+  regValidate.updateUserRules(),
+  regValidate.checkUpdateUserData,
+  utilities.handleErrors(accountController.updateUserAccount));
+
 // Route to build sever error page
 router.get("/trigger-error", utilities.handleErrors(accountController.triggerError));
 

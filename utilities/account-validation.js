@@ -205,4 +205,77 @@ validate.updatePassword = () => {
   ]
 }
 
+validate.updateUserRules = () => {
+  return [
+    // account type is required and must be in the DB
+    body("account_type")
+      .notEmpty().withMessage("Please select an account type.")
+      .bail()
+      .custom(async (account_type) => {
+        const accountTypeExists = await accountModel.checkExistingAccountType(account_type)
+        if (!accountTypeExists){
+          throw new Error("Account Type selected is not in the list of account types. Please choose an existing one.")
+        }
+      }),
+    // firstname is required and must be string
+    body("account_firstname")
+      .trim()
+      .notEmpty()
+      .withMessage("Please provide a first name."),
+
+    // lastname is required and must be string
+    body("account_lastname")
+      .trim()
+      .notEmpty()
+      .withMessage("Please provide a last name."),
+
+    // valid email is required and cannot already exist in the DB
+    body("account_email")
+      .trim()
+      .isEmail({ if: body("account_email").notEmpty() })
+      .withMessage("Please provide a valid email address.")
+      .normalizeEmail({ gmail_remove_dots: false })
+      .custom(async (account_email, { req }) => {
+        const account_id = req.body.account_id
+        const accountData = await accountModel.getAccountById(account_id)
+        if (account_email != accountData.account_email){
+          const emailExists = await accountModel.checkExistingEmail(account_email)
+          if (emailExists){
+            throw new Error("Email exists. Please log in or use different email.")
+          }
+        }
+      }),
+  ]
+}
+
+validate.checkUpdateUserData = async (req, res, next) => {
+  let { account_firstname, account_lastname, account_email, account_type, account_id } = req.body
+  let errors = []
+  errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav()
+    // If the error is from the password form, user data will be missing. Fetch it.
+    if (!account_firstname) {
+      const accountData = await accountModel.getAccountById(account_id)
+      account_firstname = accountData.account_firstname
+      account_lastname = accountData.account_lastname
+      account_email = accountData.account_email
+      account_type = accountData.account_type
+    }
+
+    res.render("account/modify-user-account", {
+      title: "Edit User Account",
+      nav,
+      errors,
+      account_firstname,
+      account_lastname,
+      account_email,
+      account_type,
+      account_id,
+    })
+    return
+  }
+  next()
+}
+
 module.exports = validate
