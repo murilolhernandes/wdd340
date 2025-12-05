@@ -260,7 +260,7 @@ input:valid, textarea:valid, select:valid {
   background-color: white;
 }
 
-label, .register, input[type="submit"], .password, .info {
+label, .register, input[type="submit"], .password, .info, #account-type {
   color: white;
   font-family: "Roboto Slab";
 }
