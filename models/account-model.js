@@ -128,4 +128,18 @@ async function updateUserAccount(account_firstname, account_lastname, account_em
   }
 }
 
-module.exports = { registerAccount, checkExistingEmail, getAccountById, getAccountByEmail, updateAccount, updateAccountPassword, getAccountByType, getAccountTypes, checkExistingAccountType, updateUserAccount }
+/* **********************
+ *   Delete User Data
+* ********************* */
+async function deleteUserData(account_id){
+  try {
+    const data = await pool.query(
+      `DELETE FROM public.account WHERE account_id = $1`,
+      [account_id])
+      return data
+  } catch (error) {
+    new Error("Delete User Error")
+  }
+}
+
+module.exports = { registerAccount, checkExistingEmail, getAccountById, getAccountByEmail, updateAccount, updateAccountPassword, getAccountByType, getAccountTypes, checkExistingAccountType, updateUserAccount, deleteUserData }

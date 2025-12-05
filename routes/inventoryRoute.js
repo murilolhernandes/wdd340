@@ -51,7 +51,7 @@ router.post("/update/",
   invValidate.checkUpdateData,
   utilities.handleErrors(invController.updateInventory));
 
-// Route to build the modify inventory view
+// Route to build the delete inventory view
 router.get("/delete/:inv_id", utilities.handleErrors(invController.buildDeleteConfirmationView));
 
 // Route to post the delete inventory

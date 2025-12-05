@@ -137,7 +137,7 @@ async function updateInventory(classification_id, inv_make, inv_model, inv_descr
 }
 
 /* **********************
- *   Dlete Inventory Data
+ *   Delete Inventory Data
 * ********************* */
 async function deleteInventoryItem(inv_id){
   try {

@@ -1,0 +1,42 @@
+<!-- Content heading -->
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<!-- Message block -->
+<%- messages() %>
+
+<% if (errors) { %>
+  <ul class="notice">
+  <% errors.array().forEach(error => { %>
+    <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+  <% } %>
+
+<!-- Form -->
+<div class="form">
+  <form action="/account/delete/" method="post" id="deleteForm">
+    <fieldset>
+      <legend>Delete Inventory</legend>
+      <div class="information">
+        <p class="required-fields">Confirm Deletion - The delete is permanent.</p>
+        <label for="account_firstname">First Name:</label>
+        <input type="text" id="account_firstname" name="account_firstname" title="Your first name" autocapitalize="given-name" required value="<%= locals.account_firstname %>">
+
+        <label for="account_lastname">Last Name:</label>
+        <input type="text" id="account_lastname" name="account_lastname" title="Your last name" autocomplete="family-name" required value="<%= locals.account_lastname %>">
+
+        <label for="account_email">Email:</label>
+        <input type="email" id="account_email" name="account_email" title="Your email address" placeholder="Enter a valid email address" autocomplete="email" required value="<%= locals.account_email %>">
+        
+        <input type="submit" id="accountDeletion" title="Delete User" value="Delete User Account">
+        <input type="hidden" name="account_id"
+        <% if(locals.account_id) { %> value="<%= locals.account_id %>"
+        <% } %>>
+      </div>
+    </fieldset>
+  </form>
+</div>

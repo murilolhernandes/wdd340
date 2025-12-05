@@ -59,6 +59,13 @@ router.post("/update-user",
   regValidate.checkUpdateUserData,
   utilities.handleErrors(accountController.updateUserAccount));
 
+// Route to build the delete user account view
+router.get("/delete/:account_id", utilities.handleErrors(accountController.buildDeleteConfirmationView));
+
+// Route to post the delete user
+router.post("/delete/",
+  utilities.handleErrors(accountController.deleteUser));
+
 // Route to build sever error page
 router.get("/trigger-error", utilities.handleErrors(accountController.triggerError));
 

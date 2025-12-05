@@ -252,7 +252,7 @@ invCont.buildDeleteConfirmationView = async function (req, res, next) {
  *  Delete Inventory Data
 * ************************** */
 invCont.deleteInventory = async function (req, res, next) {
-  let nav = await utilities.getNav()
+  // let nav = await utilities.getNav()
   const inv_id = parseInt(req.body.inv_id)
 
   const deleteResult = await invModel.deleteInventoryItem(inv_id)
@@ -264,7 +264,7 @@ invCont.deleteInventory = async function (req, res, next) {
     res.status(201).redirect("/inv/")
   } else {
     req.flash("notice", "Sorry, the delete failed.")
-    res.redirect("./inv/delete/inv_id")
+    res.redirect(`./inv/delete/${inv_id}`)
   }
 }
 

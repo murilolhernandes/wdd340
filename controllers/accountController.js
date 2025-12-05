@@ -110,7 +110,7 @@ async function accountLogin(req, res) {
       return res.redirect("/account/")
     } 
     else {
-      req.flash("message notice", "Please check your credentials and try again.")
+      req.flash("notice", "Please check your credentials and try again.")
       res.status(400).render("account/login", {
         title: "Login",
         nav,
@@ -300,10 +300,6 @@ async function updateUserAccount(req, res, next) {
   )
 
   if (updateResult) {
-    // const accountData = await accountModel.getAccountById(account_id)
-    // delete accountData.account_password
-    // const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
-    // res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
     const userName = `${updateResult.account_firstname} ${updateResult.account_lastname}`
     req.flash(
       "notice", `Congratulations, ${userName}'s information has been updated.`
@@ -326,4 +322,45 @@ async function updateUserAccount(req, res, next) {
   }
 }
 
-module.exports = { buildLogin, buildRegister, accountLogin, registerAccount, buildManagementView, buildEditAccInfoView, updateAccount, updateAccountPassword, logout, getAccountJSON, buildModifyAccountView, updateUserAccount }
+/* ***************************
+ *  Build the delete view
+* ************************** */
+async function buildDeleteConfirmationView(req, res, next) {
+  const account_id = parseInt(req.params.account_id)
+  let nav = await utilities.getNav()
+  const accountData = await accountModel.getAccountById(account_id)
+  const userName = `${accountData.account_firstname} ${accountData.account_lastname}`
+  const accountSelect = await utilities.getAccountDropDown(accountData.account_type)
+  res.render("./account/delete-user", {
+    title: `Delete ${userName}`,
+    nav,
+    errors: null,
+    accountSelect: accountSelect,
+    account_firstname: accountData.account_firstname,
+    account_lastname: accountData.account_lastname,
+    account_email: accountData.account_email,
+    account_id: accountData.account_id,
+  })
+}
+
+/* ***************************
+ *  Delete Inventory Data
+* ************************** */
+async function deleteUser(req, res, next) {
+  // let nav = await utilities.getNav()
+  const account_id = parseInt(req.body.account_id)
+
+  const deleteResult = await accountModel.deleteUserData(account_id)
+  
+  if (deleteResult) {
+    req.flash(
+      "notice", `The deletion was successfull.`
+    )
+    res.status(201).redirect("/account/")
+  } else {
+    req.flash("notice", "Sorry, the delete failed.")
+    res.redirect(`/account/delete/${account_id}`)
+  }
+}
+
+module.exports = { buildLogin, buildRegister, accountLogin, registerAccount, buildManagementView, buildEditAccInfoView, updateAccount, updateAccountPassword, logout, getAccountJSON, buildModifyAccountView, updateUserAccount, buildDeleteConfirmationView, deleteUser }
