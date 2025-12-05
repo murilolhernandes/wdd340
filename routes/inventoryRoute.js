@@ -40,7 +40,6 @@ router.post("/add-inventory",
 
 // Route to build the inventory for AJAX route
 router.get("/getInventory/:classification_id",
-  // invValidate.checkAccountType,
   utilities.handleErrors(invController.getInventoryJSON));
 
 // Route to build the modify inventory view

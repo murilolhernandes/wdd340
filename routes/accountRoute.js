@@ -46,6 +46,10 @@ router.post("/update-password",
 // Route to log the user out
 router.get("/logout", utilities.handleErrors(accountController.logout));
 
+// Route to build the account for AJAX route
+router.get("/getAccount/:account_type",
+  utilities.handleErrors(accountController.getAccountJSON));
+
 // Route to build sever error page
 router.get("/trigger-error", utilities.handleErrors(accountController.triggerError));
 

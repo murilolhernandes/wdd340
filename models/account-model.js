@@ -81,4 +81,23 @@ async function updateAccountPassword(account_password, account_id){
   }
 }
 
-module.exports = { registerAccount, checkExistingEmail, getAccountById, getAccountByEmail, updateAccount, updateAccountPassword }
+/* ***************************
+ *  Get account data
+  * ************************** */
+async function getAccountByType(account_type){
+  try {
+    const data = await pool.query("SELECT * FROM public.account WHERE account_type = $1 ORDER BY account_type", [account_type])
+    return data.rows
+  } catch (error) {
+    console.error("getaccountbytype " + error)
+  }
+}
+
+/* ***************************
+ *  Get all account data
+  * ************************** */
+async function getAccountTypes() {
+  return await pool.query("SELECT unnest AS account_type FROM unnest(enum_range(NULL::account_type)) WHERE unnest <> 'SuperAdmin'")
+}
+
+module.exports = { registerAccount, checkExistingEmail, getAccountById, getAccountByEmail, updateAccount, updateAccountPassword, getAccountByType, getAccountTypes }

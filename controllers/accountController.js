@@ -129,10 +129,12 @@ async function accountLogin(req, res) {
 async function buildManagementView(req, res, next) {
   let nav = await utilities.getNav()
   const account_firstname = res.locals.accountData.account_firstname
+  const accountSelect = await utilities.getAccountDropDown()
   res.render("account/management", {
     title: "Account Management",
     nav,
     account_firstname,
+    accountSelect,
     errors: null,
   })
 }
@@ -249,4 +251,17 @@ async function logout(req, res, next) {
   res.redirect("/")
 }
 
-module.exports = { buildLogin, buildRegister, accountLogin, registerAccount, buildManagementView, buildEditAccInfoView, updateAccount, updateAccountPassword, logout }
+/* ***************************
+ *  Return Inventory by Classification as JSON
+* ************************** */
+async function getAccountJSON(req, res, next){
+  const account_type = req.params.account_type
+  const accData = await accountModel.getAccountByType(account_type)
+  if (accData[0].account_id) {
+    return res.json(accData)
+  } else {
+    next(new Error("No data returned"))
+  }
+}
+
+module.exports = { buildLogin, buildRegister, accountLogin, registerAccount, buildManagementView, buildEditAccInfoView, updateAccount, updateAccountPassword, logout, getAccountJSON }

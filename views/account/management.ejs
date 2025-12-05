@@ -20,8 +20,22 @@
   <h1>Welcome <%= account_firstname %></h1>
   <p>You're logged in.</p>
   <a href="/account/update">Edit Account Information</a>
-  <% if (locals.accountData.account_type == "Admin" || locals.accountData.account_type == "Employee") { %>
+  <% if (locals.accountData.account_type == "Admin" || locals.accountData.account_type == "SuperAdmin") { %>
+    <h1>Edit User Accounts</h1>
+    <div id="class-label">
+      <label for="account_type" id="accountType">Choose an account type to see the users.</label>
+      <select id="account_type" name="account_type">
+        <%- accountSelect %></select>
+    </div>
+  <table id="accountDisplay"></table>
+
+  <% } %>
+  <% if (locals.accountData.account_type == "Admin" || locals.accountData.account_type == "Employee" || locals.accountData.account_type == "SuperAdmin") { %>
     <h1>Inventory Management</h1>
     <a href="/inv">Management Inventory</a>
   <% } %>
 </div>
+
+<noscript>JavaScript must be enabled to use this page.</noscript>
+
+<script src="../../js/management.js"></script>

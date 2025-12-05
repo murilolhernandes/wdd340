@@ -275,7 +275,7 @@ label, .register, input[type="submit"], .password, .info {
 }
 
 #account_firstname, #account_lastname, #account_email, #account_password, #classification_name, #classification_id,
-#inv_make, #inv_model, #inv_description, #inv_image, #inv_thumbnail, #inv_price, #inv_year, #inv_miles, #inv_color {
+#inv_make, #inv_model, #inv_description, #inv_image, #inv_thumbnail, #inv_price, #inv_year, #inv_miles, #inv_color, #account_type {
   border-radius: 0.3rem;
   padding: 0.3rem;
 }
@@ -334,7 +334,7 @@ textarea {
   flex-direction: column;
 }
 
-#classificationList {
+#classificationList, #accountType {
   display: flex;
   flex-direction: column;
   color: black;

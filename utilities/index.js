@@ -1,4 +1,5 @@
 const invModel = require("../models/inventory-model")
+const accModel = require("../models/account-model")
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
 const Util = {}
@@ -156,12 +157,28 @@ Util.checkLogin = (req, res, next) => {
 **************************************** */
 Util.checkLoginType = (req, res, next) => {
   let account_type = res.locals.accountData.account_type
-  if (account_type == "Admin" || account_type == "Employee") {
+  if (account_type == "Admin" || account_type == "Employee" || account_type == "SuperAdmin") {
     next()
   } else {
     req.flash("notice", "Please log in.")
     return res.redirect("/account/login")
   }
+}
+
+/* **************************************
+* Build the account information view HTML
+* ************************************ */
+Util.getAccountDropDown = async function(account_id){
+  let data = await accModel.getAccountTypes()
+  let options = '<option value="">Select an account type</option>'
+  data.rows.forEach((row) => {
+    options += `<option value="${row.account_type}"`
+    if (account_id != null && row.account_type == account_type) {
+      options += " selected"
+    }
+    options += `>${row.account_type}</option>`
+  })
+  return options
 }
 
 module.exports = Util
